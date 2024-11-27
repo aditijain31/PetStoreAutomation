@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+	<Properties>
+		<Property name="LOG_PATTERN">%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %m%n</Property>
+		<Property name="basePath">./logs</Property>
+		<Property name="maxLogSize">50000</Property>
+	</Properties>
+
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${LOG_PATTERN}" />
+		</Console>
+
+		<RollingFile name="fileLogger"
+			fileName="${basePath}/app.log"
+			filePattern="${basePath}/app-%d{yyyy-MM-dd}.log">
+			<PatternLayout pattern="${LOG_PATTERN}" />
+			<SizeBasedTriggeringPolicy size="${maxLogSize}" />
+		</RollingFile>
+	</Appenders>
+
+	<Loggers>
+		<Root level="Info">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="fileLogger" />
+		</Root>
+	</Loggers>
+
+</Configuration>
